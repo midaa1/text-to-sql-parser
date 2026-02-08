@@ -30,21 +30,10 @@ def build_input(question, schema):
     for table, columns in schema.items():
         schema_text += f"- {table}({', '.join(columns)})\n"
 
-    input_text = f"""
+    input_text = f"""Translate to SQL:
 Question: {question}
 Tables:
 {schema_text}
 """
     return input_text.strip()
 
-sample = data[0]
-
-question = sample["question"]
-sql = sample["query"]
-db_id = sample["db_id"]
-
-schema = get_schema(db_id, table)
-input_text = build_input(question, schema)
-
-print(input_text)
-print("SQL:", sql)
